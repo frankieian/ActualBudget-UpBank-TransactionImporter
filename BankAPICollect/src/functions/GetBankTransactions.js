@@ -206,6 +206,7 @@ async function uploadTransactions(accounts) {
                             payee_name: transaction.attributes.description || 'Unknown',
                             imported_id: transaction.id,
                             cleared: transaction.attributes.status === "SETTLED",
+                            notes: transaction.attributes.message
                         };
 
                         // Additional Checks for special transfer types (roundup & forward / covers)
