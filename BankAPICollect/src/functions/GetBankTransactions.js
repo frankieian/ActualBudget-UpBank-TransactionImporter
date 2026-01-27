@@ -206,7 +206,7 @@ async function uploadTransactions(accounts) {
                             payee_name: transaction.attributes.description || 'Unknown',
                             imported_id: transaction.id,
                             cleared: transaction.attributes.status === "SETTLED",
-                            notes: transaction.attributes.message
+                            notes: transaction.attributes?.note?.text ?? transaction.attributes.message
                         };
 
                         // Additional Checks for special transfer types (roundup & forward / covers)
@@ -249,6 +249,7 @@ async function uploadTransactions(accounts) {
                 payee_name: transaction.attributes.description || 'Unknown',
                 imported_id: transaction.id,
                 cleared: transaction.attributes.status === "SETTLED",
+                notes: transaction.attributes?.note?.text ?? transaction.attributes.message
               };
 
 
@@ -261,6 +262,7 @@ async function uploadTransactions(accounts) {
                   payee_name: transaction.attributes.cashback.description || 'Unknown',
                   imported_id: `${transaction.id}-cashback`,
                   cleared: transaction.attributes.status === "SETTLED",
+                  notes: transaction.attributes?.note?.text ?? transaction.attributes.message
                 };
                 return [formattedTransaction, cashBackTransaction];
               }
@@ -466,6 +468,7 @@ async function uploadWeeklyTransactions(weeklyTransactions) {
                             payee_name: transaction.attributes.description || 'Unknown',
                             imported_id: transaction.id,
                             cleared: transaction.attributes.status === "SETTLED",
+                            notes: transaction.attributes?.note?.text ?? transaction.attributes.message
                         };
 
                         // Additional Checks for special transfer types (roundup & forward / covers)
@@ -508,6 +511,7 @@ async function uploadWeeklyTransactions(weeklyTransactions) {
                 payee_name: transaction.attributes.description || 'Unknown',
                 imported_id: transaction.id,
                 cleared: transaction.attributes.status === "SETTLED",
+                notes: transaction.attributes?.note?.text ?? transaction.attributes.message
               };
 
               // Checks if Perk-up or happy hour was won and adds cash back transaction
@@ -519,6 +523,7 @@ async function uploadWeeklyTransactions(weeklyTransactions) {
                   payee_name: transaction.attributes.cashback.description || 'Unknown',
                   imported_id: `${transaction.id}-cashback`,
                   cleared: transaction.attributes.status === "SETTLED",
+                  notes: transaction.attributes?.note?.text ?? transaction.attributes.message
                 };
                 return [formattedTransaction, cashBackTransaction];
               }
